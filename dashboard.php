@@ -52,7 +52,7 @@
                         <i class="fa-solid fa-book-open-reader text-sm"></i>
 
                         <span class="text-xs font-medium">
-                            Sistem Manajemen Perpustakaan
+                            Sistem Manajemen Perpustakaan SMKN 1 Kamal
                         </span>
                     </div>
 
