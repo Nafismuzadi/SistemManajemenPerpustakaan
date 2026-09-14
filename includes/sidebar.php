@@ -1,3 +1,8 @@
+<?php
+// Deteksi nama file halaman yang sedang dibuka secara presisi
+$page_saat_ini = $page_saat_ini ?? basename($_SERVER['SCRIPT_NAME'] ?? $_SERVER['PHP_SELF']);
+?>
+
 <aside
     class="fixed left-0 top-0 z-50 flex h-screen w-[235px] flex-col border-r border-slate-200 bg-white"
 >
@@ -17,7 +22,7 @@
         <div>
 
             <h2 class="text-[15px] font-bold text-slate-800">
-                Perpustakaan
+                Perpustakaan SMKN 1 Kamal
             </h2>
 
             <p class="text-[9px] text-slate-400">
@@ -47,10 +52,10 @@
 
             <a
                 href="dashboard.php"
-                class="flex items-center gap-3 rounded-lg bg-blue-600 px-3 py-2.5 text-xs font-semibold text-white shadow-sm"
+                class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-xs font-semibold transition <?= ($page_saat_ini == 'dashboard.php' || $page_saat_ini == '') ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100' ?>"
             >
 
-                <i class="fa-solid fa-house w-5 text-center"></i>
+                <i class="fa-solid fa-house w-5 text-center <?= ($page_saat_ini == 'dashboard.php' || $page_saat_ini == '') ? 'text-white' : 'text-slate-400' ?>"></i>
 
                 <span>
                     Dashboard
@@ -63,10 +68,10 @@
 
             <a
                 href="cari-buku.php"
-                class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-xs text-slate-600 transition hover:bg-slate-100"
+                class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-xs font-semibold transition <?= ($page_saat_ini == 'cari-buku.php') ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100' ?>"
             >
 
-                <i class="fa-solid fa-magnifying-glass w-5 text-center text-slate-400"></i>
+                <i class="fa-solid fa-magnifying-glass w-5 text-center <?= ($page_saat_ini == 'cari-buku.php') ? 'text-white' : 'text-slate-400' ?>"></i>
 
                 <span>
                     Cari Buku
@@ -79,10 +84,10 @@
 
             <a
                 href="buku-dipinjam.php"
-                class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-xs text-slate-600 transition hover:bg-slate-100"
+                class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-xs font-semibold transition <?= ($page_saat_ini == 'buku-dipinjam.php') ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100' ?>"
             >
 
-                <i class="fa-solid fa-bookmark w-5 text-center text-slate-400"></i>
+                <i class="fa-solid fa-bookmark w-5 text-center <?= ($page_saat_ini == 'buku-dipinjam.php') ? 'text-white' : 'text-slate-400' ?>"></i>
 
                 <span>
                     Buku Dipinjam
@@ -95,10 +100,10 @@
 
             <a
                 href="daftar-tunggu.php"
-                class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-xs text-slate-600 transition hover:bg-slate-100"
+                class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-xs font-semibold transition <?= ($page_saat_ini == 'daftar-tunggu.php') ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100' ?>"
             >
 
-                <i class="fa-solid fa-list-check w-5 text-center text-slate-400"></i>
+                <i class="fa-solid fa-list-check w-5 text-center <?= ($page_saat_ini == 'daftar-tunggu.php') ? 'text-white' : 'text-slate-400' ?>"></i>
 
                 <span>
                     Daftar Tunggu
@@ -111,10 +116,10 @@
 
             <a
                 href="profil.php"
-                class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-xs text-slate-600 transition hover:bg-slate-100"
+                class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-xs font-semibold transition <?= ($page_saat_ini == 'profil.php') ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100' ?>"
             >
 
-                <i class="fa-solid fa-id-card w-5 text-center text-slate-400"></i>
+                <i class="fa-solid fa-id-card w-5 text-center <?= ($page_saat_ini == 'profil.php') ? 'text-white' : 'text-slate-400' ?>"></i>
 
                 <span>
                     Profil
@@ -134,8 +139,8 @@
     <div class="mt-auto border-t border-slate-100 p-3">
 
         <a
-            href="logout.php"
-            class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-xs text-red-500 transition hover:bg-red-50"
+            href="rolelogin.php"
+            class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-xs font-semibold text-red-500 transition hover:bg-red-50"
         >
 
             <i class="fa-solid fa-power-off w-5 text-center"></i>
