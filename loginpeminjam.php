@@ -4,69 +4,30 @@ require 'koneksi.php';
 
 $error = '';
 $success = '';
-$view = 'login'; // Default tampilan adalah form login
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // ==========================================
-    // PROSES REGISTER PEMINJAM
-    // ==========================================
-    if (isset($_POST['action']) && $_POST['action'] == 'register') {
-        $nama      = $_POST['regNama'];
-        $user      = $_POST['regUser'];
-        $pass      = $_POST['regPass']; // Idealnya gunakan password_hash()
-        $identitas = $_POST['regIdentitas'];
-        $telepon   = $_POST['regNoTelp'];
-        $alamat    = $_POST['regAlamat'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['action'] == 'login') {
+    $user = $_POST['loginUser'];
+    $pass = $_POST['loginPass'];
 
-        // Cek apakah username atau nomor identitas sudah dipakai
-        $cek = $conn->prepare("SELECT username FROM peminjam WHERE username = ? OR nomor_identitas = ?");
-        $cek->bind_param("ss", $user, $identitas);
-        $cek->execute();
-        
-        if ($cek->get_result()->num_rows > 0) {
-            $error = "Username atau Nomor Identitas sudah terdaftar!";
-            $view = 'register'; // Buka kembali form register
-        } else {
-            // Insert data baru ke database lengkap
-            $stmt = $conn->prepare("INSERT INTO peminjam (nama_peminjam, username, password, nomor_identitas, alamat, no_telepon) VALUES (?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssssss", $nama, $user, $pass, $identitas, $alamat, $telepon);
-            
-            if ($stmt->execute()) {
-                $success = "Registrasi Berhasil! Silakan masuk menggunakan akun Anda.";
-                $view = 'login'; // Pindah ke form login
-            } else {
-                $error = "Gagal mendaftar: " . $conn->error;
-                $view = 'register';
-            }
-        }
-    } 
-    // ==========================================
-    // PROSES LOGIN PEMINJAM
-    // ==========================================
-    elseif (isset($_POST['action']) && $_POST['action'] == 'login') {
-        $user = $_POST['loginUser'];
-        $pass = $_POST['loginPass'];
+    $stmt = $conn->prepare("SELECT * FROM peminjam WHERE username = ? AND password = ?");
+    $stmt->bind_param("ss", $user, $pass);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-        $stmt = $conn->prepare("SELECT * FROM peminjam WHERE username = ? AND password = ?");
-        $stmt->bind_param("ss", $user, $pass);
-        $stmt->execute();
-        $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        $data = $result->fetch_assoc();
+        $_SESSION['userRole'] = 'peminjam';
+        $_SESSION['peminjam_data'] = $data;
+        $_SESSION['isLoggedIn'] = true;
 
-        if ($result->num_rows > 0) {
-            $data = $result->fetch_assoc();
-            $_SESSION['userRole'] = 'peminjam';
-            $_SESSION['peminjam_data'] = $data;
-            $_SESSION['isLoggedIn'] = true;
-            
-            // Pindah ke halaman dashboard (pastikan file dashboard.php ada)
-            header("Location: dashboard.php");
-            exit;
-        } else {
-            $error = "Username atau password salah!";
-        }
+        header("Location: dashboard.php");
+        exit;
+    } else {
+        $error = "Username atau password salah!";
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -90,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="p-2 bg-white/10 backdrop-blur-md rounded-xl"><i class="ph ph-student text-2xl"></i></div>
         <span class="font-bold text-lg">Portal Peminjam</span>
       </div>
-      <h1 id="titleHeader" class="text-xl font-bold"><?= ($view == 'register') ? 'Buat Akun Baru 📝' : 'Masuk Akun 👋' ?></h1>
+      <h1 id="titleHeader" class="text-xl font-bold">Masuk Akun 👋</h1>
     </div>
 
     <!-- Alert PHP -->
@@ -109,13 +70,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- ========================================== -->
     <!-- FORM LOGIN -->
     <!-- ========================================== -->
-    <form method="POST" id="loginForm" class="p-6 space-y-4 <?= ($view == 'register') ? 'hidden' : ''; ?>">
+    <form method="POST" id="loginForm" class="p-6 space-y-4">
       <input type="hidden" name="action" value="login">
       <div>
-        <label class="block text-xs font-semibold text-slate-700 mb-1.5">Username</label>
+        <label class="block text-xs font-semibold text-slate-700 mb-1.5">NIS</label>
         <div class="relative">
           <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400"><i class="ph ph-user"></i></span>
-          <input type="text" name="loginUser" required class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-blue-600" placeholder="Masukkan username">
+          <input type="text" name="loginUser" required class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-blue-600" placeholder="Masukkan NIS">
         </div>
       </div>
       <div>
@@ -128,77 +89,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl text-xs transition duration-200 flex items-center justify-center gap-2">
         <span>Masuk</span> <i class="ph ph-arrow-right font-bold"></i>
       </button>
-      <div class="text-center text-xs text-slate-500 pt-2">
-        Belum punya akun? <button type="button" onclick="toggleView('register')" class="text-blue-600 font-semibold hover:underline">Daftar Sekarang</button>
-      </div>
     </form>
 
-    <!-- ========================================== -->
-    <!-- FORM REGISTER (Kini Lebih Lengkap) -->
-    <!-- ========================================== -->
-    <form method="POST" id="registerForm" class="p-6 space-y-3 <?= ($view == 'login') ? 'hidden' : ''; ?> max-h-[60vh] overflow-y-auto">
-      <input type="hidden" name="action" value="register">
-      
-      <div>
-        <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Lengkap</label>
-        <input type="text" name="regNama" required class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-blue-600" placeholder="Nama lengkap Anda">
-      </div>
-      
-      <div class="grid grid-cols-2 gap-3">
-        <div>
-          <label class="block text-xs font-semibold text-slate-700 mb-1">NIS/NIK</label>
-          <input type="text" name="regIdentitas" required class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-blue-600" placeholder="Nomor Identitas">
-        </div>
-        <div>
-          <label class="block text-xs font-semibold text-slate-700 mb-1">No. WhatsApp</label>
-          <input type="text" name="regNoTelp" required class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-blue-600" placeholder="0812...">
-        </div>
-      </div>
-
-      <div>
-        <label class="block text-xs font-semibold text-slate-700 mb-1">Alamat</label>
-        <textarea name="regAlamat" rows="2" required class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-blue-600" placeholder="Alamat lengkap"></textarea>
-      </div>
-
-      <div class="grid grid-cols-2 gap-3">
-        <div>
-          <label class="block text-xs font-semibold text-slate-700 mb-1">Username</label>
-          <input type="text" name="regUser" required class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-blue-600" placeholder="Untuk login">
-        </div>
-        <div>
-          <label class="block text-xs font-semibold text-slate-700 mb-1">Kata Sandi</label>
-          <input type="password" name="regPass" required class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-blue-600" placeholder="••••••••">
-        </div>
-      </div>
-
-      <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 rounded-xl text-xs transition duration-200 mt-2 flex items-center justify-center gap-2">
-        <span>Daftar Menjadi Anggota</span> <i class="ph ph-user-plus font-bold"></i>
-      </button>
-      
-      <div class="text-center text-xs text-slate-500 pt-2 pb-2">
-        Sudah punya akun? <button type="button" onclick="toggleView('login')" class="text-blue-600 font-semibold hover:underline">Masuk di sini</button>
-      </div>
-    </form>
 
   </div>
 
-  <script>
-    // Fungsi untuk mengganti tampilan form tanpa reload
-    function toggleView(mode) {
-      const loginForm = document.getElementById('loginForm');
-      const regForm = document.getElementById('registerForm');
-      const titleHeader = document.getElementById('titleHeader');
-      
-      if (mode === 'register') {
-        loginForm.classList.add('hidden');
-        regForm.classList.remove('hidden');
-        titleHeader.innerText = "Buat Akun Baru 📝";
-      } else {
-        regForm.classList.add('hidden');
-        loginForm.classList.remove('hidden');
-        titleHeader.innerText = "Masuk Akun 👋";
-      }
-    }
-  </script>
+
 </body>
 </html>

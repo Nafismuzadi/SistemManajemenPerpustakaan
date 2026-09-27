@@ -6,11 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Buku Dipinjam Saya - Perpustakaan SMKN 1 Kamal</title>
-
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Font Awesome -->
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -19,24 +15,16 @@
 
 <body class="bg-slate-50 text-slate-800">
 
-    <!-- Sidebar -->
     <?php include 'includes/sidebar.php'; ?>
 
-    <!-- Main Content -->
     <div class="ml-[235px] min-h-screen">
 
-        <!-- Header -->
         <?php include 'includes/header.php'; ?>
 
-        <!-- Main User Section -->
         <main class="p-7">
 
-            <!-- =========================
-                 WELCOME / USER BANNER
-            ========================== -->
             <section class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-800 via-blue-900 to-blue-700 px-10 py-8 text-white shadow-sm">
 
-                <!-- Decorative Circle -->
                 <div class="absolute -right-10 -top-16 h-48 w-48 rounded-full bg-blue-400/20"></div>
                 <div class="absolute -bottom-20 right-32 h-44 w-44 rounded-full bg-white/5"></div>
 
@@ -124,7 +112,7 @@
                                 Total Pernah Dipinjam
                             </p>
                             <h3 class="mt-2 text-3xl font-bold text-slate-800">
-                                14
+                                5
                             </h3>
                             <p class="mt-2 text-[11px] text-emerald-600 font-medium">
                                 Track record peminjaman baik
@@ -166,10 +154,10 @@
                 <!-- Filter Tabs -->
                 <div class="flex gap-2">
                     <button class="rounded-lg bg-blue-600 px-3.5 py-1.5 text-xs font-medium text-white shadow-sm">
-                        Sedang Dipinjam (2)
+                        Sedang Dipinjam
                     </button>
                     <button class="rounded-lg border border-slate-200 bg-white px-3.5 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50">
-                        Riwayat (12)
+                        Riwayat
                     </button>
                 </div>
             </div>
@@ -183,8 +171,9 @@
                 <!-- Book Item 1 -->
                 <div class="flex flex-col sm:flex-row rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md">
                     <!-- Book Cover Mockup -->
-                    <div class="h-40 w-28 flex-shrink-0 overflow-hidden rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-400">
-                        <i class="fa-solid fa-book-open text-4xl"></i>
+                   <div class="h-40 w-28 flex-shrink-0 overflow-hidden rounded-lg bg-slate-100 border border-slate-200">
+                    <img src="assets/bumi.jpg" alt="Cover Buku Bumi"
+                        class="h-full w-full object-cover">
                     </div>
 
                     <!-- Book Info -->
@@ -192,7 +181,7 @@
                         <div>
                             <div class="flex items-center justify-between">
                                 <span class="rounded-md bg-blue-50 px-2 py-0.5 text-[10px] font-semibold text-blue-700 uppercase">
-                                    Teknologi
+                                    Fantasi
                                 </span>
                                 <span class="text-[11px] font-medium text-amber-600">
                                     <i class="fa-solid fa-hourglass-half mr-1"></i> Sisa 2 Hari
@@ -200,10 +189,10 @@
                             </div>
 
                             <h3 class="mt-2 text-sm font-bold text-slate-800 leading-snug">
-                                Pemrograman Web Modern dengan Tailwind CSS
+                                Bumi
                             </h3>
                             <p class="mt-1 text-xs text-slate-500">
-                                Penulis: Ahmad Solikin • 2023
+                                Penulis: Tere Liye
                             </p>
                         </div>
 
@@ -230,8 +219,9 @@
                 <!-- Book Item 2 -->
                 <div class="flex flex-col sm:flex-row rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md">
                     <!-- Book Cover Mockup -->
-                    <div class="h-40 w-28 flex-shrink-0 overflow-hidden rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-400">
-                        <i class="fa-solid fa-book text-4xl"></i>
+                    <div class="h-40 w-28 flex-shrink-0 overflow-hidden rounded-lg bg-slate-100 border border-slate-200">
+                    <img src="assets/bulan.jpg" alt="Cover buku bulan" class="h-full w-full object-cover"
+                    >
                     </div>
 
                     <!-- Book Info -->
@@ -239,7 +229,7 @@
                         <div>
                             <div class="flex items-center justify-between">
                                 <span class="rounded-md bg-indigo-50 px-2 py-0.5 text-[10px] font-semibold text-indigo-700 uppercase">
-                                    Jaringan
+                                    Fantasi
                                 </span>
                                 <span class="text-[11px] font-medium text-slate-500">
                                     <i class="fa-solid fa-hourglass-start mr-1"></i> Sisa 5 Hari
@@ -247,10 +237,10 @@
                             </div>
 
                             <h3 class="mt-2 text-sm font-bold text-slate-800 leading-snug">
-                                Dasar-Dasar Jaringan Komputer & MikroTik
+                                Bulan
                             </h3>
                             <p class="mt-1 text-xs text-slate-500">
-                                Penulis: Ir. Hendra Wijaya • 2022
+                                Penulis: Tere Liye
                             </p>
                         </div>
 
