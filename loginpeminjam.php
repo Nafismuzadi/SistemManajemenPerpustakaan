@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 require 'koneksi.php';
 
@@ -6,10 +7,11 @@ $error = '';
 $success = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['action'] == 'login') {
-    $user = $_POST['loginUser'];
+    $user = $_POST['loginUser']; // Menangkap input NIS
     $pass = $_POST['loginPass'];
 
-    $stmt = $conn->prepare("SELECT * FROM peminjam WHERE username = ? AND password = ?");
+    // PERBAIKAN: Mengubah query untuk mengecek NIS, bukan username
+    $stmt = $conn->prepare("SELECT * FROM peminjam WHERE NIS = ? AND password = ?");
     $stmt->bind_param("ss", $user, $pass);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -23,7 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['a
         header("Location: dashboard.php");
         exit;
     } else {
-        $error = "Username atau password salah!";
+        // PERBAIKAN: Mengubah pesan error agar sesuai dengan input
+        $error = "NIS atau kata sandi salah!";
     }
 }
 ?>

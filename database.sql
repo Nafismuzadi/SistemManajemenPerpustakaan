@@ -1,5 +1,4 @@
 CREATE DATABASE db_sistem_manajemen_perpustakaan;
-
 USE db_sistem_manajemen_perpustakaan;
 
 CREATE TABLE petugas (
@@ -38,5 +37,5 @@ CREATE TABLE peminjaman (
 
     FOREIGN KEY (id_buku) REFERENCES buku(id_buku) ON DELETE CASCADE,
     FOREIGN KEY (NIS) REFERENCES peminjam(NIS) ON DELETE CASCADE,
-    FOREIGN KEY (id_petugas) REFERENCES ADMIN(id_petugas) ON DELETE CASCADE
+    FOREIGN KEY (id_petugas) REFERENCES petugas(id_petugas) ON DELETE CASCADE 
 );

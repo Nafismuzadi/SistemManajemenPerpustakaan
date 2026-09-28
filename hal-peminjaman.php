@@ -1,3 +1,17 @@
+<?php
+session_start();
+require 'koneksi.php'; // Opsional, tambahkan jika di file tersebut butuh ambil data database
+
+// Cek apakah user sudah login
+if (!isset($_SESSION['isLoggedIn']) || $_SESSION['isLoggedIn'] !== true) {
+    // Jika belum login, tendang kembali ke halaman pilihan akses
+    header("Location: index.php");
+    exit;
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="id">
 
