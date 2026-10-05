@@ -31,55 +31,64 @@ if (!isset($_SESSION['isLoggedIn']) || $_SESSION['isLoggedIn'] !== true) {
 <body class="bg-slate-50 text-slate-800">
 
     <!-- Sidebar Mockup (Admin) -->
-    <aside class="fixed left-0 top-0 h-full w-[235px] bg-white border-r border-slate-200 z-20 flex flex-col justify-between p-4">
-        <div>
-            <!-- Brand -->
-            <div class="flex items-center gap-3 px-2 py-3 border-b border-slate-100">
-                <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-white font-bold shadow-md shadow-blue-500/20">
-                    <i class="fa-solid fa-book-bookmark text-lg"></i>
-                </div>
-                <div>
-                    <h1 class="text-sm font-bold text-slate-800 leading-tight">PERPUS SMKN 1</h1>
-                    <p class="text-[10px] text-slate-500">Panel Admin / Petugas</p>
-                </div>
+<!-- Sidebar -->
+<aside class="fixed left-0 top-0 h-full w-[235px] bg-white border-r border-slate-200 z-20 flex flex-col justify-between p-4">
+    <div>
+        <!-- Brand -->
+        <div class="flex items-center gap-3 px-2 py-3 border-b border-slate-100">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-white font-bold shadow-md shadow-blue-500/20">
+                <i class="fa-solid fa-book-bookmark text-lg"></i>
             </div>
-
-            <!-- Navigation Links -->
-            <nav class="mt-6 space-y-1">
-                <a href="admin-dashboard.php" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-xs font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition">
-                    <i class="fa-solid fa-chart-pie w-4 text-center"></i>
-                    Dashboard Admin
-                </a>
-                <a href="kelola-buku.php" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-xs font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition">
-                    <i class="fa-solid fa-book w-4 text-center"></i>
-                    Data Buku
-                </a>
-                <a href="kelola-peminjaman.php" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-xs font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition">
-                    <i class="fa-solid fa-hand-holding-hand w-4 text-center"></i>
-                    Transaksi Pinjam
-                </a>
-                <a href="laporan-peminjaman.php" class="flex items-center gap-3 rounded-lg bg-blue-50 px-3 py-2.5 text-xs font-semibold text-blue-700 transition">
-                    <i class="fa-solid fa-file-invoice w-4 text-center"></i>
-                    Laporan Peminjaman
-                </a>
-                <a href="kelola-anggota.php" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-xs font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition">
-                    <i class="fa-solid fa-users w-4 text-center"></i>
-                    Data Anggota
-                </a>
-            </nav>
-        </div>
-
-        <!-- Admin Profile Footer -->
-        <div class="border-t border-slate-100 pt-3 flex items-center gap-3 px-2">
-            <div class="h-8 w-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shadow-sm">
-                ADM
-            </div>
-            <div class="overflow-hidden">
-                <p class="text-xs font-semibold text-slate-800 truncate">Bambang S.Pd.</p>
-                <p class="text-[10px] text-slate-400 truncate">NIP: 198503122010</p>
+            <div>
+                <h1 class="text-sm font-bold text-slate-800 leading-tight">PERPUS SMKN 1</h1>
+                <p class="text-[10px] text-slate-500">Panel Admin / Petugas</p>
             </div>
         </div>
-    </aside>
+
+        <!-- Navigation Links -->
+        <nav class="mt-6 space-y-1">
+            <!-- Catatan: Pindahkan class 'bg-blue-50 text-blue-700' ke menu yang sedang aktif di masing-masing halaman -->
+            <a href="dashboardadmin.php" class="flex items-center gap-3 rounded-lg bg-blue-50 px-3 py-2.5 text-xs font-semibold text-blue-700 transition">
+                <i class="fa-solid fa-chart-pie w-4 text-center"></i>
+                Dashboard Admin
+            </a>
+            <a href="kelola-buku.php" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-xs font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition">
+                <i class="fa-solid fa-book w-4 text-center"></i>
+                Data Buku
+            </a>
+            <a href="kelola-peminjaman.php" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-xs font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition">
+                <i class="fa-solid fa-hand-holding-hand w-4 text-center"></i>
+                Transaksi Pinjam
+            </a>
+            <a href="laporan-peminjaman.php" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-xs font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition">
+                <i class="fa-solid fa-file-invoice w-4 text-center"></i>
+                Laporan Peminjaman
+            </a>
+            <a href="kelola-anggota.php" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-xs font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition">
+                <i class="fa-solid fa-users w-4 text-center"></i>
+                Data Anggota
+            </a>
+            
+            <!-- Tombol Logout -->
+            <a href="logout.php" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-xs font-medium text-red-600 hover:bg-red-50 transition mt-4 border border-transparent hover:border-red-100">
+                <i class="fa-solid fa-right-from-bracket w-4 text-center"></i>
+                Keluar
+            </a>
+        </nav>
+    </div>
+
+    <!-- Admin Profile Footer -->
+    <div class="border-t border-slate-100 pt-3 flex items-center gap-3 px-2 mt-auto">
+        <div class="h-8 w-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shadow-sm">
+            ADM
+        </div>
+        <div class="overflow-hidden">
+            <!-- Nama admin dipanggil dinamis dari session -->
+            <p class="text-xs font-semibold text-slate-800 truncate"><?= htmlspecialchars($_SESSION['admin_data']['nama_petugas'] ?? 'Administrator'); ?></p>
+            <p class="text-[10px] text-slate-400 truncate">Administrator</p>
+        </div>
+    </div>
+</aside>
 
     <!-- Main Content Wrapper -->
     <div class="ml-[235px] min-h-screen">

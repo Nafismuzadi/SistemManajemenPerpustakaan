@@ -39,3 +39,4 @@ CREATE TABLE peminjaman (
     FOREIGN KEY (NIS) REFERENCES peminjam(NIS) ON DELETE CASCADE,
     FOREIGN KEY (id_petugas) REFERENCES petugas(id_petugas) ON DELETE CASCADE 
 );
+

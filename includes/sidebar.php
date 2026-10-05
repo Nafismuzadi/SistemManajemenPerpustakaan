@@ -139,7 +139,7 @@ $page_saat_ini = $page_saat_ini ?? basename($_SERVER['SCRIPT_NAME'] ?? $_SERVER[
     <div class="mt-auto border-t border-slate-100 p-3">
 
         <a
-            href="rolelogin.php"
+            href="logout.php"
             class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-xs font-semibold text-red-500 transition hover:bg-red-50"
         >
 
